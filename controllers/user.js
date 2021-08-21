@@ -4,8 +4,6 @@ const bcrypjs = require('bcryptjs');
 const User = require('../models/user');
 const { Promise } = require('mongoose');
 
-
-
 const usuariosGet = async (req, res = response) => {
     
     const { limit = 5, from =0 } = req.query
@@ -72,13 +70,13 @@ const usuariosDelete = async (req, res = response) => {
     
     const { id } = req.params;
 
-    // Fisiacamente lo Borramos
-    // const usuario = await User.findByIdAndDelete ( id )
-
     const usuario = await User.findByIdAndUpdate( id, {estado: false } );
 
+    const usuarioAutenticado = req.usuario
+
     res.json({
-        usuario
+        usuario,
+        usuarioAutenticado
     })
 
 }
