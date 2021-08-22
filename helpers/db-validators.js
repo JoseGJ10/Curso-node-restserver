@@ -1,5 +1,4 @@
-const Role = require('../models/rol')
-const User = require('../models/user')
+const { Role, User, Categoria, Producto } = require('../models')
 
 const esRoleValido = async  (rol='') => {
     const existeRol = await Role.findOne({ rol });
@@ -22,8 +21,24 @@ const usuarioExistePorId = async ( id ) => {
     }
 }
 
+const existeCategoriaPorId = async ( id ) => {
+    const existeCategoria = await Categoria.findById( id );
+    if ( !existeCategoria ) {
+        throw new Error(`No existe id: ${ id } en la BBDD.`)
+    }
+}
+
+const existeProductoPorId = async ( id ) => {
+    const existeProducto = await Producto.findById( id );
+    if ( !existeProducto ) {
+        throw new Error(`No existe id: ${ id } en la BBDD.`)
+    }
+}
+
 module.exports = {
     esRoleValido,
     emailExiste,
-    usuarioExistePorId
+    usuarioExistePorId,
+    existeCategoriaPorId,
+    existeProductoPorId
 }
