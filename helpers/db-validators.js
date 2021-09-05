@@ -35,10 +35,19 @@ const existeProductoPorId = async ( id ) => {
     }
 }
 
+const coleccionesPermitidas = ( c = '' ,colecciones = [] ) => {
+        const existeColeccion = colecciones.includes( c )
+        if( !existeColeccion ) {
+            throw new Error(`La colección ${c} no existe en la BBDD.`);
+        }
+        return true;
+}
+
 module.exports = {
     esRoleValido,
     emailExiste,
     usuarioExistePorId,
     existeCategoriaPorId,
-    existeProductoPorId
+    existeProductoPorId,
+    coleccionesPermitidas
 }

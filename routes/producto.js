@@ -19,7 +19,6 @@ router.get('/', obtenerProductos )
 router.get('/:id',[
     check( 'id' ,'No es un id de Mongo').isMongoId(),
     check( 'id').custom( existeProductoPorId ),
-
     validarCampos
 ], obtenerProducto )
 
